@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>med personal</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+</head>
+
+<body style="background-color: slategrey; color: white;">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">MediCare</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'index' %}active{% endif %}" href="/">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'services' %}active{% endif %}" href="/service">Услуги</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'about' %}active{% endif %}" href="/about">О нас</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/contact">Контакт</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<section id="surgeons" class="mt-4">
+    <div class="container">
+        <h2>Хирурги</h2>
+        <div class="row">
+            {% for surgeon in surgeons %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ surgeon.name }} {{ surgeon.Lastname }}</h5>
+                            <p class="card-text">Номер: {{ surgeon.number }}</p>
+                            <p class="card-text">Специализация: {{ surgeon.specialization }}</p>
+                            <p class="card-text">Квалификации: {{ surgeon.qualifications }}</p>
+                            <div class="text-end mt-3">
+                                <button class="btn btn-dark">Записаться</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="nurses" class="mt-4">
+    <div class="container">
+        <h2>Медсестры</h2>
+        <div class="row">
+            {% for nurse in nurses %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ nurse.name }} {{ nurse.Lastname }}</h5>
+                            <p class="card-text">Номер: {{ nurse.number }}</p>
+                            <p class="card-text">Смена: {{ nurse.shift }}</p>
+                            <p class="card-text">Сертификации: {{ nurse.certifications }}</p>
+                            <div class="text-end mt-3">
+                                <button class="btn btn-dark">Записаться</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

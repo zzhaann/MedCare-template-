@@ -1,0 +1,170 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+      <style>
+        .card {
+            height: 100%;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          height: 100%;
+        }
+
+    </style>
+
+</head>
+
+<body style="background-color: slategrey; color: white;">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">MediCare</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'index' %}active{% endif %}" href="/">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'services' %}active{% endif %}" href="/service">Услуги</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'about' %}active{% endif %}" href="/about">О нас</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/contact">Контакт</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+    <section class="hero">
+        <div class="container text-center">
+            <p>Ваше здоровье - наш приоритет</p>
+        </div>
+    </section>
+    <section id="services" class="services">
+        <div class="container text-center mt-6">
+        <h2>Наши услуги</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Онлайн-консультация</h3>
+                    <p>Поговорите с нашими профессионалами, не выходя из дома.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Диагностические тесты</h3>
+                    <p>Мы предлагаем широкий спектр диагностических услуг.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Рецептурные заправки</h3>
+                    <p>С легкостью пополняйте свои рецепты.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+  <div class="container text-center">
+            <h2>Наши продукты</h2>
+  </div>
+
+
+<div class="container mt-2" style="color: black;">
+<div class="row">
+    {% for post in posts %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <img src="{{ post.photo.url }}" class="card-img-top img-fluid rounded" alt="{{ post.title }}" style="max-height: 250px;">
+                <div class="card-body">
+                    <h3 class="card-title">{{ post.title }}</h3>
+                    <p class="card-text">{{ post.content }}</p>
+                    <button type="button" class="btn btn-dark mt-auto" data-bs-toggle="modal" data-bs-target="#myModal{{ post.id }}">
+                        Предметы, используемые для аппарата
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal{{ post.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Предметы, используемые для аппарата</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% for remedy in items %}
+                            {% if remedy.brandId.id == post.id %}
+                                <div class="mb-3">
+                                    <img src="{{ remedy.photo.url }}" class="img-fluid rounded" alt="{{ remedy.name }}" style="max-height: 200px;">
+                                    <p>{{ remedy.name }}</p>
+                                    <p>{{ remedy.content }}</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="mt-2">
+      <section id="products" class="featured-products">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{% static 'images/1l.png'  %}" class="card-img-top" alt="Product 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Фламадекс</h5>
+                            <p class="card-text">Хорошо известный своим эффективным анальгетическим и жаропонижающим действием, является часто применяемым лекарством для облегчения различных видов боли.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{% static 'images/2l.jpg'  %}" class="card-img-top" height="270px"  alt="Product 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Медиклог</h5>
+                            <p class="card-text">  Широко используемое противовоспалительное средство, которое помогает справиться с болями и жаром при различных состояниях. Его популярным выбором для  облегчения дискомфорта.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{% static 'images/3l.jpg'  %}" class="card-img-top" height="270px" alt="Product 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Феррумал</h5>
+                            <p class="card-text">Привычное средство для снижения температуры и облегчения боли, благодаря своему анальгетическому и противовоспалительному воздействию.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+</div>
+</div>
+
+<div class="mt-5">
+    {% include 'med/footer.html' %}
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

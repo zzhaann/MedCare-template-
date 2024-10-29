@@ -1,0 +1,58 @@
+{% extends 'med/base.html' %}
+ {% load static %}
+
+{% block title %}About Us{% endblock %}
+{% block content %}
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        body {
+         background-color:slategrey  !important;
+        }
+    </style>
+
+
+    <div class="container">
+
+        <header class="text-center mt-4">
+            <h1 >MediCare</h1>
+        </header>
+
+        <section class="mt-4">
+            <h2>Наша миссия</h2>
+            <p class="lead">На сайте MediCare мы стремимся улучшить здоровье во всем мире, предоставляя точную и доступную информацию о медицине, здоровье и велнесе. Наша цель - дать людям возможность принимать обоснованные решения о своем благополучии.</p>
+        </section>
+
+        <section class="row mt-4">
+            <div class="col-md-8">
+                <h2>Чем мы отличаемся</h2>
+                <div  class="list-group">
+                    <div class="list-group-item" style="background-color: lightslategrey">
+                        <strong>Точность и доверие:</strong> Мы отдаём предпочтение точной информации, гарантируя, что наш контент основан на последних научных исследованиях и соответствует самым высоким стандартам надежности.
+                    </div>
+                    <div class="list-group-item" style="background-color: lightslategrey">
+                        <strong>Пользовательский интерфейс:</strong> Наш сайт разработан с учетом потребностей пользователя. Мы стремимся создать легкий и интуитивно понятный опыт, обеспечивая легкость поиска информации для посетителей.
+                    </div>
+                    <div class="list-group-item" style="background-color: lightslategrey">
+                        <strong>Широкий охват:</strong> От общих советов по здоровью до конкретных медицинских состояний, мы охватываем широкий спектр тем, чтобы предоставить комплексный ресурс для наших пользователей.
+                    </div>
+                    <div class="list-group-item" style="background-color: lightslategrey">
+                        <strong>Участие сообщества:</strong> Мы ценим наше сообщество. Через форумы, обсуждения и обратную связь пользователей, мы создаем привлекательную среду, где люди могут делиться опытом и поддерживать друг друга в их здоровье.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-5">
+                <img src="{% static 'images/company.jpg'  %}" alt="Большое изображение">
+            </div>
+        </section>
+
+
+
+    </div>
+<div class="mt-5">
+      {% include 'med/footer.html' %}
+</div>
+{% endblock %}
+
